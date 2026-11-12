@@ -85,6 +85,11 @@ async function start() {
     rijen.splice(1, 0, ['Uw afdruk', geprint]);
     toon('ok', `&#10003; Actueel: ${esc(t.r)}`, 'Deze afdruk is de laatste revisie. U mag ermee werken.',
          'Ce plan est la dernière révision.', rijen);
+  } else if (revNr(geprint) > revNr(t.r)) {
+    rijen.splice(1, 0, ['Uw afdruk', geprint]);
+    rijen[2][0] = 'Geldige revisie';
+    toon('nok', '&#9888; Revisie ingetrokken', `Revisie <b>${esc(geprint)}</b> is ingetrokken. Geldig is <b>${esc(t.r)}</b>. Niet mee werken: vraag de geldige tekening op.`,
+         `Révision ${esc(geprint)} annulée. Révision valable : ${esc(t.r)}. Ne pas utiliser.`, rijen);
   } else {
     rijen.splice(1, 0, ['Uw afdruk', geprint]);
     toon('nok', '&#9888; Verouderde tekening', `Deze afdruk is <b>${esc(geprint)}</b>, maar de laatste revisie is <b>${esc(t.r)}</b>. Niet mee werken: vraag de nieuwe tekening op.`,
